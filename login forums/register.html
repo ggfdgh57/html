@@ -3,44 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style=" -webkit-backdrop-filter: blur(5px);backdrop-filter: blur(5px);font-family: Arial, sans-serif; text-align: center; background-image: url(resim/background.jpg); margin: 0; padding: 20px;">
 <center>
-<form method="post" action="registerendpoint.php">
-<table>
-
- <tr>
-<td>Adınız : </td>
-<td><input id="a" type="text" placeholder="Adınızı Girin"></td>
- </tr>
-
-<tr>
-<td>Kullanıcı Adı : </td>
-<td><input id="b" type="text" placeholder="Kullanıcı Adınız"></td>
-</tr>
-
-<tr>
-<td>Mail : </td>
-<td><input id="c" type="email" placeholder="Mail Adresiniz"></td>
-</tr>
-
-<tr>
-<td>Şifre : </td>
-<td><input id="d" type="password" placeholder="Şifreniz"></td>
-</tr>
-
-<tr>
-<td><input class="but" type="submit" value="Kayıt Ol"></td>
-</tr>
-
-</table>
+    <div style="  display: flex;align-items: center;justify-content: center;-webkit-backdrop-filter: blur(5px);backdrop-filter: blur(10px);background-color: rgba(236, 237, 236, 0.5); width: 450px; height: 500px; border-radius: 10px;">
+<center>
+<img src="resim/logo.png" width="300px" alt="">
 <br>
-
-Zaten Kayıtlımısınız <a href="login.html" style="font-size: 15px;">Giriş Yapın </a><br>
-<a href="password.html">Şifreni'mi Unuttun? </a>
-</form>    
+<input  style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="a" type="text" placeholder=" Kullanıcı Adı">
+<br>
+<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="b" type="text" placeholder=" Adınızı Girin">
+<br>
+<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;"id="c" type="email" placeholder=" Mail Adresiniz">
+<br>
+<input style="border: none; border-radius: 10px;" id="d" type="password" placeholder="Şifre">
+<div><input class="but"  type="submit" value="Kayıt Ol"></div>
+<h2 class="kyt" ><a href="login.html">Giriş Yap </a><br></h2>
 </center>
+</div>
+    </center>
 </body>
 </html>
