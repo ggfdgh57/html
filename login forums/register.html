@@ -11,18 +11,20 @@
     <div style="  display: flex;align-items: center;justify-content: center;-webkit-backdrop-filter: blur(5px);backdrop-filter: blur(10px);background-color: rgba(236, 237, 236, 0.5); width: 450px; height: 500px; border-radius: 10px;">
 <center>
 <img src="resim/logo.png" width="300px" alt="">
+<form action="register.php" method="post">
 <br>
-<input  style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="a" type="text" placeholder=" Kullanıcı Adı">
+<input  style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="a" name="a" type="text" placeholder=" Kullanıcı Adı">
 <br>
-<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="b" type="text" placeholder=" Adınızı Girin">
+<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;" id="b" name="b" type="text" placeholder=" Adınızı Girin">
 <br>
-<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;"id="c" type="email" placeholder=" Mail Adresiniz">
+<input style="overflow-x: auto; white-space: nowrap;text-align: left;padding-left: 1px;  border: none; display: flex; border-radius: 10px;"id="c" name="c" type="email" placeholder=" Mail Adresiniz">
 <br>
-<input style="border: none; border-radius: 10px;" id="d" type="password" placeholder="Şifre">
+<input style="border: none; border-radius: 10px;" id="d" name="d" type="password" placeholder="Şifre">
 <div><input class="but"  type="submit" value="Kayıt Ol"></div>
 <h2 class="kyt" ><a href="login.html">Giriş Yap </a><br></h2>
+</form>
 </center>
 </div>
-    </center>
+</center>
 </body>
 </html>
