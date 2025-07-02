@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorular</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2 id="c"></h2>
+  <div id="d"></div>
+  <div id="e"></div>
+  <br />
+  
+  <script>
+    const a = [
+      { a: "Suriye'nin başkenti neresidir?", b: "şam" },
+      { a: "Rusyanın Başkenti neresidir?", b: "moskova" },
+      { a: "Su kaç derecede donar?", b: "0" },
+      { a: "Ulan Bator nerededir?", b: "avrupa" },
+      { a: "Xss nedir (Açılımı)", b: "cross site script" },
+      { a: "Linux felsefesi nedir?", b: "özgür yazılım" },
+      { a: "cpp hangi dilin uzantısı?", b: "c++" },
+      { a: "Atatürk'ün doğum yılı?", b: "1881" },
+      { a: "html bir programlama dili midir? (evet/hayır)", b: "hayır" },
+      { a: "En büyük gezegen hangisidir?", b: "jüpiter" }
+    ];
+
+    let b = 0;
+    let c = parseInt(localStorage.getItem('b') || 0);
+    let d = localStorage.getItem('a') || 'Misafir';
+
+    document.getElementById('c').innerText = "Hoş Geldin, " + d + "!";
+
+    function e() {
+      if (b >= a.length) {
+        f();
+        return;
+      }
+
+      let g = a[b];
+      document.getElementById('d').innerHTML = `
+        <p><strong>${g.a}</strong></p>
+        <input type="text" id="a1" placeholder="Cevap" />
+        <br />
+        <button onclick="h()">Cevapla</button>
+        <p>Puan: ${c}</p>
+      `;
+    }
+
+    function h() {
+      let i = document.getElementById('a1').value.toLowerCase().trim();
+      if (i === a[b].b.toLowerCase()) {
+        c += 10;
+        localStorage.setItem('b', c);
+      }
+      b++;
+      e();
+    }
+
+    function f() {
+      document.getElementById('d').innerHTML = "<h3>Yarışma Bitti! Puanın: " + c + "</h3>";
+      let j = "";
+
+      if (c === 100) {
+        j = `<iframe width="560" height="315" src="https://www.youtube.com/embed/vy1Gh9eZLoM?si=CgfMLiG6V_iPSCXP" frameborder="0" allowfullscreen></iframe>`;
+      } else if (c >= 50) {
+        j = `<iframe width="560" height="315" src="https://www.youtube.com/embed/HpdPawopy4s?si=nr7uNdaYwgayHPbx" frameborder="0" allowfullscreen></iframe>`;
+      } else {
+        j = `<iframe width="560" height="315" src="https://youtube.com/embed/QmtzlmWTaTo?si=AYO18lBCjFSDwmjT" frameborder="0" allowfullscreen></iframe>`;
+      }
+
+      document.getElementById('e').innerHTML = j;
+      document.getElementById('f').style.display = "inline-block";
+    }
+
+    function m(){
+      window.parent.document.getElementById('a').src = 'index.html';}
+    e();
+  </script>
+</body>
+ <button onclick="m()">Tekrar Başla</button>
+</html>

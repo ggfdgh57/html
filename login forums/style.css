@@ -1,0 +1,53 @@
+input {
+  padding: 8px;
+  font-size: 16px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.sfr{
+color: rgb(183, 12, 12);
+}
+
+.sfr:hover{
+color: rgba(243, 7, 62, 0.50);  
+}
+
+.but{
+  display: flex;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(92, 120, 205);
+  color: whitesmoke;
+  border-radius: 5px;
+}
+
+.but:hover{
+   background-color: rgba(92, 120, 205,0.2) ;
+   border: none;
+}
+
+.center-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab{
+  background-color: rgb(2, 0, 4);
+  border-radius: 30px;
+}
+
+.kyt{
+  font-size: 15px;
+  color: black;
+}
+
+.kyt:hover{
+color: rgb(190, 5, 5) ;
+border: none;
+}
