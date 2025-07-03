@@ -3,39 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <title>Test</title>
 </head>
-
-<body style=" -webkit-backdrop-filter: blur(5px);backdrop-filter: blur(5px);font-family: Arial, sans-serif; text-align: center; background-image: url(resim/indexbackground.jpeg); margin: 0; padding: 20px;">
-
-<div style="color:rgba(1,1,1,0.5);">
-    <h1 style=" color: rgb(247, 247, 249); font-family: Arial, Helvetica, sans-serif;  display: flex;align-items: center;justify-content: center;" ><b>Hoşgeldiniz</h1>
-    <button  onclick="window.location.href = 'index.html';" style="padding: 0.6em 2em;border: none;outline: none;color: rgb(255, 255, 255);background: #111;cursor: pointer;position: relative;z-index: 0;border-radius: 10px;user-select: none;-webkit-user-select: none;touch-action: manipulation;">Ana Menü</button>    
-    <button  onclick="window.location.href = 'login.html';" style="padding: 0.6em 2em;border: none;outline: none;color: rgb(255, 255, 255);background: #111;cursor: pointer;position: relative;z-index: 0;border-radius: 10px;user-select: none;-webkit-user-select: none;touch-action: manipulation;">Login</button>    
-    <button  onclick="window.location.href = 'register.html';" style="padding: 0.6em 2em;border: none;outline: none;color: rgb(255, 255, 255);background: #111;cursor: pointer;position: relative;z-index: 0;border-radius: 10px;user-select: none;-webkit-user-select: none;touch-action: manipulation;">Register</button>    
-    <button onclick="document.body.appendChild(Object.assign(document.createElement('iframe'), {src:'chat.html', width:300, height:400, frameBorder:0, style:'position:fixed; bottom:20px; left:20px; overflow:hidden;'})).setAttribute('scrolling', 'no');" style="padding:0.6em 2em; border:none; outline:none; color:white; background:#111; cursor:pointer; border-radius:10px;">Chat Gpt</button>
-
+<!-- 
+-webkit-backdrop-filter: blur(5px);
+backdrop-filter: blur(5px);
+font-family: Arial, sans-serif;
+text-align: center;
+background-image: url(resim/indexbackground.jpeg);
+margin: 0; padding: 20px;"-->
+<body style="background-color: rgb(16, 119, 88);">
 
 
+<div class="container-fluid p-5 bg-primary text-white text-center">
+    <h1 style=" color: rgb(247, 247, 249);
+    font-family: Arial,
+    Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;" >
+    <b>Hoşgeldiniz</h1>
+
+        
+    <button  onclick="window.location.href = 'index.html';"
+     style="padding: 0.6em 2em;
+     border: none;
+     outline: none;
+     color: rgb(255, 255, 255);
+     background: #111;
+     cursor: pointer;
+     position: relative;
+     z-index: 0;
+     border-radius: 10px;
+     user-select: none;
+     -webkit-user-select: none;
+     touch-action: manipulation;">Ana Menü</button> 
+
+
+    <button  onclick="window.location.href = 'login.html';" 
+    style="padding: 0.6em 2em;
+    border: none;outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;">
+    Login</button>    
 
     
+    <button  onclick="window.location.href = 'register.html';" 
+    style="padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;">
+    Register</button> 
 
+    <button onclick="document.body.appendChild
+    (Object.assign(document.createElement('iframe'), 
+    {src:'chat.html', width:300, height:400, frameBorder:0,
+    style:'position:fixed;bottom:20px;left:20px; overflow:hidden;'}))
+    .setAttribute('scrolling', 'no');" 
+    style="padding:0.6em 2em;
+    border:none;
+    outline:none;
+    color:white;
+    background:#111;
+    cursor:pointer;
+    border-radius:10px;">
+    Chat Gpt</button>
 </div>
-
-    <hr>
-
+<br>
     <center>
-   <div style=" -webkit-backdrop-filter: blur(5px);backdrop-filter: blur(5px); display: flex;align-items: center;justify-content: center;-webkit-backdrop-filter: blur(5px);backdrop-filter: blur(10px);background-color: rgba(236, 237, 236, 0.5); height: 500px; border-radius: 10px;font-family: 'Courier New', Courier, monospace; display: flex;align-items: center;justify-content: center;"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda cumque amet excepturi, nulla illum minima laboriosam laborum, qui ab rerum temporibus architecto tenetur! Tempore doloremque perferendis eligendi. Rerum, hic temporibus!
+   <div class="row col-sm-4 container mt-4 p-5 bg-dark text-white rounded" style="width: 500px; height: 500px;"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda cumque amet excepturi, nulla illum minima laboriosam laborum, qui ab rerum temporibus architecto tenetur! Tempore doloremque perferendis eligendi. Rerum, hic temporibus!
    Optio officia aut illo corrupti distinctio suscipit cum. Similique sed alias natus autem corrupti ab dolorum id, totam mollitia laudantium porro! Architecto quibusdam in necessitatibus, sed saepe voluptatem ipsa molestias.
    Ipsum itaque voluptatibus officia aliquid excepturi, ad dolor molestias ipsa quasi accusamus. Dolor corrupti ratione, provident enim eos est, aliquam in fugit odit eveniet modi. Molestiae nam obcaecati mollitia sed.
-   Nulla beatae dolor quibusdam repellat recusandae, unde, officiis error soluta, amet harum dignissimos a nisi culpa. Atque temporibus voluptatibus nam dolore ut, quasi nihil explicabo recusandae ab, eligendi libero quisquam.
-   Alias quidem nemo sed iste velit est ad officia facilis, aspernatur unde. Accusamus porro assumenda sunt itaque. Repudiandae aperiam hic tenetur ut! Explicabo maiores tempore odio maxime. Eaque, officiis blanditiis!
-   Explicabo expedita rem doloremque sunt repellat amet id dolorem, dignissimos impedit reprehenderit nemo odio eos recusandae nulla similique veniam molestiae illum tempore quia cupiditate laborum ex commodi nesciunt! Doloribus, eaque.
-   Tempora vero aliquam dolor vitae ut iusto quo odit nemo facere eius necessitatibus consequuntur dolore illo id aut est ad sed non, accusamus excepturi? Laudantium perferendis necessitatibus maxime eos. Dolor.
-   Accusamus reprehenderit doloremque quasi velit, nulla tempora, debitis optio fuga voluptate harum minima, porro perferendis. Dolore esse, quasi debitis sunt, tempore ducimus harum architecto aspernatur voluptates quibusdam nobis neque facere!
-   Iure quos vitae repudiandae. Nam dolores nemo ea beatae incidunt. Soluta quam assumenda provident recusandae sunt fugit, consectetur ipsa, itaque doloribus odio magnam quisquam eligendi. Pariatur saepe impedit illo unde!
-   Consectetur, magnam? Sequi veniam rerum in eius quasi porro, voluptate, accusantium cum, expedita quidem et perferendis obcaecati inventore ipsam soluta? Doloremque nam iusto officiis veniam consequatur labore delectus illum illo.</p></div>
+   Nulla beatae dolor quibusdam repellat recusandae, unde, officiis error soluta, amet harum dignissimos a nisi culpa.
     </center>
+
     <!--<iframe src="login.html" id="a" width="100%" height="400px" frameborder="0"></iframe>-->
 
 </body>

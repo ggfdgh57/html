@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit('Eksik bilgi gönderildi.');
     }
 
-    $xmlFile = 'kullanicilar.xml';
+    $xmlFile = 'dataabse/kullanicilar.xml';
 
     if (file_exists($xmlFile)) {
         $xml = simplexml_load_file($xmlFile);
