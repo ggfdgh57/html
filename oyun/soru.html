@@ -17,7 +17,7 @@
       { a: "Suriye'nin başkenti neresidir?", b: "şam" },
       { a: "Rusyanın Başkenti neresidir?", b: "moskova" },
       { a: "Su kaç derecede donar?", b: "0" },
-      { a: "Ulan Bator nerededir?", b: "avrupa" },
+      { a: "Ulan Batur nerededir?", b: "moğolistan" },
       { a: "Xss nedir (Açılımı)", b: "cross site script" },
       { a: "Linux felsefesi nedir?", b: "özgür yazılım" },
       { a: "cpp hangi dilin uzantısı?", b: "c++" },
@@ -74,10 +74,10 @@
       document.getElementById('f').style.display = "inline-block";
     }
 
-    function m(){
-      window.parent.document.getElementById('a').src = 'index.html';}
+
     e();
   </script>
 </body>
- <button onclick="m()">Tekrar Başla</button>
+<button onclick="window.location.href='index.html'">Tekrar Başla</button>
+
 </html>
