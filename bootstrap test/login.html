@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Formu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
+      <div class="card-body p-4">
+        <h4 class="card-title text-center mb-4">Giriş Yap</h4>
+
+        <form action="http://127.0.0.1:8080" method="POST" class="needs-validation" novalidate>
+          
+          <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="email" placeholder="test@example.com" required>
+            <label for="email">Email Adresiniz</label>
+            <div class="invalid-feedback">Geçerli bir email adresi giriniz.</div>
+          </div>
+
+          <div class="form-floating mb-3">           
+            <input type="password" name="sifre" class="form-control" id="sifre" placeholder="Şifre" required>
+            <label for="sifre">Şifre</label>
+            <div class="invalid-feedback">Lütfen şifrenizi giriniz.</div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="politika" required>
+            <label class="form-check-label" for="politika">Politikaları okudum ve kabul ediyorum</label>
+            <div class="invalid-feedback">Devam etmek için bu kutucuğu işaretleyin.</div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Gönder</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var forms = document.querySelectorAll('.needs-validation');
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+
+</body>
+</html>
