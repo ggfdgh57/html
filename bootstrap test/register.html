@@ -2,82 +2,106 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kayıt Formu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kayıt Ol</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm w-100" style="max-width: 400px;">
-      <div class="card-body p-4">
-        <h4 class="card-title text-center mb-4">Kayıt Ol</h4>
-        <form id="registerForm" class="needs-validation" novalidate>
+<body class="bg-dark text-white">
 
-          <div class="form-floating mb-3">
-            <input type="text" name="kad" class="form-control" id="kad" placeholder="test123" required>
-            <label for="kad">Kullanıcı Adınız</label>
-            <div class="invalid-feedback">Lütfen bir kullanıcı adı belirtin.</div>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="text" name="ad" class="form-control" id="ad" placeholder="Adınız" required>
-            <label for="ad">Adınız</label>
-            <div class="invalid-feedback">Lütfen adınızı belirtin.</div>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="email" name="email" class="form-control" id="email" placeholder="test@example.com" required>
-            <label for="email">Email Adresiniz</label>
-            <div class="invalid-feedback">Lütfen geçerli bir mail adresi girin.</div>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="password" name="sifre" class="form-control" id="sifre" placeholder="Şifre" required>
-            <label for="sifre">Şifre</label>
-            <div class="invalid-feedback">Lütfen bir şifre belirleyin.</div>
-          </div>
-
-          <div class="mb-3">
-            <label for="cinsiyet" class="form-label">Cinsiyet</label>
-            <select class="form-select" name="cinsiyet" id="cinsiyet" required>
-              <option value="" selected disabled>Cinsiyet Seçiniz</option>
-              <option value="Kadın">Kadın</option>
-              <option value="Erkek">Erkek</option>
-            </select>
-            <div class="invalid-feedback">Lütfen cinsiyetinizi belirtin.</div>
-          </div>
-
-          <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="po" required>
-            <label class="form-check-label" for="po">Politikaları okudum ve kabul ediyorum</label>
-            <div class="invalid-feedback">Devam etmek için politikaları kabul etmelisiniz.</div>
-          </div>
-
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Gönder</button>
-          </div>
-        </form>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="card p-4" style="width: 400px; background-color:#1e1e1e;">
+    <h3 class="text-center mb-4">Kayıt Ol</h3>
+    <form id="registerForm" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="kad" class="form-label">Kullanıcı Adınız</label>
+        <input type="text" class="form-control" id="kad" placeholder="Kullanıcı adınız" required />
+        <div class="invalid-feedback">Lütfen bir kullanıcı adı belirtin.</div>
       </div>
-    </div>
-  </div>
 
-  <script>
-    (() => {
-      'use strict';
-      const form = document.getElementById('registerForm');
-      form.addEventListener('submit', function (e) {
-        if (!form.checkValidity()) {
-          e.preventDefault();
-          e.stopPropagation();
-        } else {
-          e.preventDefault();
-          const username = document.getElementById('kad').value;
-          localStorage.setItem('registeredUser', username);
-          window.location.href = 'login.html';
-        }
-        form.classList.add('was-validated');
-      });
-    })();
-  </script>
+      <div class="mb-3">
+        <label for="ad" class="form-label">Adınız</label>
+        <input type="text" class="form-control" id="ad" placeholder="Adınız" required />
+        <div class="invalid-feedback">Lütfen adınızı belirtin.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Adresiniz</label>
+        <input type="email" class="form-control" id="email" placeholder="test@example.com" required />
+        <div class="invalid-feedback">Lütfen geçerli bir mail adresi girin.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="sifre" class="form-label">Şifre</label>
+        <input type="password" class="form-control" id="sifre" placeholder="Şifre" required />
+        <div class="invalid-feedback">Lütfen bir şifre belirleyin.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="cinsiyet" class="form-label">Cinsiyet</label>
+        <select class="form-select" id="cinsiyet" required>
+          <option value="" selected disabled>Cinsiyet Seçiniz</option>
+          <option value="Kadın">Kadın</option>
+          <option value="Erkek">Erkek</option>
+        </select>
+        <div class="invalid-feedback">Lütfen cinsiyetinizi belirtin.</div>
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="po" required />
+        <label class="form-check-label" for="po">Politikaları okudum ve kabul ediyorum</label>
+        <div class="invalid-feedback">Devam etmek için politikaları kabul etmelisiniz.</div>
+      </div>
+
+      <div class="d-grid mb-3">
+        <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+      </div>
+
+      <div class="text-center">
+        Hesabınız var mı? <a href="login.html" class="text-info">Giriş Yap</a>
+      </div>
+
+      <div id="registerError" class="mt-3 text-danger text-center d-none"></div>
+      <div id="registerSuccess" class="mt-3 text-success text-center d-none"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const registerForm = document.getElementById("registerForm");
+  const registerError = document.getElementById("registerError");
+  const registerSuccess = document.getElementById("registerSuccess");
+
+  registerForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    registerForm.classList.add("was-validated");
+    if (!registerForm.checkValidity()) return;
+
+    const kad = document.getElementById("kad").value.trim();
+    const ad = document.getElementById("ad").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const sifre = document.getElementById("sifre").value.trim();
+    const cinsiyet = document.getElementById("cinsiyet").value;
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    if(users.some(u => u.kad.toLowerCase() === kad.toLowerCase())) {
+      registerError.textContent = "Bu kullanıcı adı zaten alınmış.";
+      registerError.classList.remove("d-none");
+      registerSuccess.classList.add("d-none");
+      return;
+    }
+
+    users.push({ kad, ad, email, sifre, cinsiyet });
+    localStorage.setItem("users", JSON.stringify(users));
+    registerError.classList.add("d-none");
+    registerSuccess.textContent = "Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...";
+    registerSuccess.classList.remove("d-none");
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -2,25 +2,23 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Forum</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body { background-color: #121212; color: #fff; }
-    .navbar-dark .navbar-nav .nav-link { color: #bbb; }
-    .navbar-dark .navbar-nav .nav-link:hover { color: #fff; }
     .card { background-color: #1e1e1e; border: 1px solid #333; margin-bottom: 1rem; }
-    .card-img-top { height: 200px; object-fit: cover; }
+    .card-img-top { height: 500px; object-fit: cover; }
     .username { font-size: 0.8rem; color: #aaa; }
+    .btn-danger { margin-left: auto; }
   </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Forum</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="index.html">Forum</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -66,28 +64,32 @@
   </div>
 </div>
 
+<div class="container mt-5 d-none" id="detailView">
+  <div class="card mx-auto" style="max-width: 600px;">
+    <img src="" id="detailImg" class="card-img-top">
+    <div class="card-body">
+      <p class="username" id="detailUser"></p>
+      <h5 class="card-title" id="detailTitle"></h5>
+      <p class="card-text" id="detailContent"></p>
+      <a href="index.html" class="btn btn-secondary">Geri Dön</a>
+    </div>
+  </div>
+</div>
+
 <script>
+  const loginUser = localStorage.getItem("loggedInUser");
+  const postForm = document.getElementById("postForm");
+  const postContainer = document.getElementById("postContainer");
+  const detailView = document.getElementById("detailView");
+  const detailTitle = document.getElementById("detailTitle");
+  const detailImg = document.getElementById("detailImg");
+  const detailContent = document.getElementById("detailContent");
+  const detailUser = document.getElementById("detailUser");
+
   const loginLink = document.getElementById("loginLink");
   const registerLink = document.getElementById("registerLink");
   const postLink = document.getElementById("postLink");
   const logoutLink = document.getElementById("logoutLink");
-  const postContainer = document.getElementById("postContainer");
-  const postForm = document.getElementById("postForm");
-
-  function updateNavbar() {
-    const loginUser = localStorage.getItem("loggedInUser");
-    if (loginUser) {
-      loginLink.classList.add("d-none");
-      registerLink.classList.add("d-none");
-      postLink.classList.remove("d-none");
-      logoutLink.classList.remove("d-none");
-    } else {
-      loginLink.classList.remove("d-none");
-      registerLink.classList.remove("d-none");
-      postLink.classList.add("d-none");
-      logoutLink.classList.add("d-none");
-    }
-  }
 
   function showPosts() {
     const posts = JSON.parse(localStorage.getItem("posts") || "[]");
@@ -96,14 +98,14 @@
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <img src="${post.image}" class="card-img-top" alt="Post Image">
+        <img src="${post.image}" class="card-img-top">
         <div class="card-body">
           <p class="username">${post.user}</p>
           <h5 class="card-title">${post.title}</h5>
-          <p class="card-text">${post.content.length > 100 ? post.content.substring(0, 100) + "..." : post.content}</p>
-          <div class="d-flex justify-content-between">
+          <p class="card-text">${post.content.substring(0, 100)}...</p>
+          <div class="d-flex">
             <button class="btn btn-primary btn-sm" onclick="viewPost(${index})">Tamamını Görüntüle</button>
-            ${localStorage.getItem("loggedInUser") === post.user ? `<button class="btn btn-danger btn-sm" onclick="deletePost(${index})">Sil</button>` : ""}
+            ${loginUser === post.user ? `<button class="btn btn-danger btn-sm ms-2" onclick="deletePost(${index})">Sil</button>` : ""}
           </div>
         </div>
       `;
@@ -114,57 +116,61 @@
   function viewPost(index) {
     const posts = JSON.parse(localStorage.getItem("posts") || "[]");
     const post = posts[index];
-    alert(`Başlık: ${post.title}\nGönderen: ${post.user}\n\n${post.content}`);
+    detailTitle.textContent = post.title;
+    detailImg.src = post.image;
+    detailContent.textContent = post.content;
+    detailUser.textContent = "Gönderen: " + post.user;
+    document.getElementById("postContainer").classList.add("d-none");
+    detailView.classList.remove("d-none");
   }
 
   function deletePost(index) {
     const posts = JSON.parse(localStorage.getItem("posts") || "[]");
-    if(posts[index].user === localStorage.getItem("loggedInUser")) {
-      posts.splice(index,1);
+    if (posts[index].user === loginUser) {
+      posts.splice(index, 1);
       localStorage.setItem("posts", JSON.stringify(posts));
       showPosts();
     }
   }
 
-  postForm.addEventListener("submit", function(e) {
+  postForm?.addEventListener("submit", function (e) {
     e.preventDefault();
-    if(!postForm.checkValidity()) {
+    if (!postForm.checkValidity()) {
       postForm.classList.add("was-validated");
       return;
     }
 
-    const fileInput = document.getElementById("pfile");
-    const file = fileInput.files[0];
-    if(!file) {
-      alert("Bir görsel seçin");
-      return;
-    }
-
     const reader = new FileReader();
-    reader.onload = function() {
+    const file = document.getElementById("pfile").files[0];
+    const title = document.getElementById("pname").value;
+    const content = document.getElementById("picerik").value;
+
+    reader.onload = function () {
       const image = reader.result;
-      const title = document.getElementById("pname").value.trim();
-      const content = document.getElementById("picerik").value.trim();
-      const user = localStorage.getItem("loggedInUser");
       const posts = JSON.parse(localStorage.getItem("posts") || "[]");
-      posts.unshift({image, title, content, user});
+      posts.unshift({ image, title, content, user: loginUser });
       localStorage.setItem("posts", JSON.stringify(posts));
       postForm.reset();
       postForm.classList.remove("was-validated");
-      const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById("postPanel"));
-      offcanvas.hide();
+      bootstrap.Offcanvas.getInstance(document.getElementById("postPanel")).hide();
       showPosts();
     };
-    reader.readAsDataURL(file);
+
+    if (file) reader.readAsDataURL(file);
   });
 
-  logoutLink.addEventListener("click", () => {
+  logoutLink.addEventListener("click", function () {
     localStorage.removeItem("loggedInUser");
-    updateNavbar();
-    showPosts();
+    location.reload();
   });
 
-  updateNavbar();
+  if (loginUser) {
+    loginLink.classList.add("d-none");
+    registerLink.classList.add("d-none");
+    postLink.classList.remove("d-none");
+    logoutLink.classList.remove("d-none");
+  }
+
   showPosts();
 </script>
 
