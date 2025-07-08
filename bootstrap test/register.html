@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kayıt Formu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm w-100" style="max-width: 400px;">
+      <div class="card-body p-4">
+        <h4 class="card-title text-center mb-4">Kayıt Ol</h4>
+        <form action="http://127.0.0.1:8080" method="POST" class="needs-validation" novalidate>
+
+          
+          <div class="form-floating mb-3">
+            <input type="text" name="kad" class="form-control" id="kad" placeholder="test123" required>
+            <label for="kad">Kullanıcı Adınız</label>
+            <div class="invalid-feedback">Lütfen bir kullanıcı adı belirtin.</div>
+          </div>
+
+          
+          <div class="form-floating mb-3">
+            <input type="text" name="ad" class="form-control" id="ad" placeholder="Adınız" required>
+            <label for="ad">Adınız</label>
+            <div class="invalid-feedback">Lütfen adınızı belirtin.</div>
+          </div>
+
+          
+          <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="email" placeholder="test@example.com" required>
+            <label for="email">Email Adresiniz</label>
+            <div class="invalid-feedback">Lütfen geçerli bir mail adresi girin.</div>
+          </div>
+
+          
+          <div class="form-floating mb-3">
+            <input type="password" name="sifre" class="form-control" id="sifre" placeholder="Şifre" required>
+            <label for="sifre">Şifre</label>
+            <div class="invalid-feedback">Lütfen bir şifre belirleyin.</div>
+          </div>
+
+          
+          <div class="mb-3">
+            <label for="cinsiyet" class="form-label">Cinsiyet</label>
+            <select class="form-select" name="cinsiyet" id="cinsiyet" required>
+              <option value="" selected disabled>Cinsiyet Seçiniz</option>
+              <option value="Kadın">Kadın</option>
+              <option value="Erkek">Erkek</option>
+            </select>
+            <div class="invalid-feedback">Lütfen cinsiyetinizi belirtin.</div>
+          </div>
+
+          
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="po" required>
+            <label class="form-check-label" for="po">Politikaları okudum ve kabul ediyorum</label>
+            <div class="invalid-feedback">Devam etmek için politikaları kabul etmelisiniz.</div>
+          </div>
+
+          
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Gönder</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+</body>
+</html>
