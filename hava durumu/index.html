@@ -7,7 +7,7 @@
      <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body style="background-color: rgb(25, 25, 25);" class="min-h-screen flex flex-col">
-  <nav class=" bg-black fixed top-0 left-0 w-full h-20 flex items-center justify-center text-white shadow-md z-50"><span class="text-2xl font-extrabold tracking-wide">Hava Durumu</span></nav>
+  <nav class=" bg-gray-900 fixed top-0 left-0 w-full h-20 flex items-center justify-center text-white shadow-md z-50"><span class="text-2xl font-extrabold tracking-wide">Hava Durumu</span></nav>
   <div class="flex-grow flex items-center justify-center px-[250px] pt-20 w-full">
   <div class="w-full max-w-5xl mb-40">
   <svg baseProfile="tiny"fill="#222222"height="auto"stroke="#ffffff"stroke-linecap="round"stroke-linejoin="round"stroke-width=".5"version="1.2"viewBox="0 0 1000 422"width="100%"xmlns="http://www.w3.org/2000/svg"class="mx-auto block rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -365,22 +365,34 @@
     <p><strong>Bölge:</strong> <span id="bolge"></span></p>
   </div>
 </div>
-
-
+<div id="statSidebar" class="fixed right-0 top-0 h-full w-64 bg-gray-900 text-white shadow-lg flex flex-col z-50 overflow-hidden">
+  <div class="p-4 sticky top-0 bg-gray-900 z-10">
+    <h2 class="text-lg font-bold mb-2">İstatistik Türü</h2>
+    <select id="statType" class="w-full p-2 bg-gray-800 border border-gray-700 text-white mb-2">
+      <option value="sıcak">En Sıcak</option>
+      <option value="soğuk">En Soğuk</option>
+      <option value="fark">Sıcaklık Farkı</option>
+    </select>
+    <input id="searchInput" type="text" placeholder="İl ara..." class="w-full p-2 bg-gray-800 border border-gray-700 text-white" />
+  </div>
+  <ul id="statList" class="overflow-y-auto px-2 pb-4 flex-1 scrollbar-hide"></ul>
+</div>
 <script>
 let cityDataCSV = {};
 
 fetch('a.csv')
-  .then(response => response.text())
-  .then(csvText => {
-    const lines = csvText.trim().split('\n');
+  .then(r => r.text())
+  .then(csv => {
+    const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
-    lines.slice(1).forEach(line => {
-      const values = line.split(',');
+    lines.slice(1).forEach(l => {
+      const vals = l.split(',');
       const city = {};
-      headers.forEach((h, i) => city[h] = values[i]);
+      headers.forEach((h,i) => city[h] = vals[i]);
       cityDataCSV[city['iladı']] = city;
     });
+    renderStats();
+    updateCityList();
   });
 
 const featuresGroup = document.getElementById('features');
@@ -388,36 +400,36 @@ const paths = featuresGroup.querySelectorAll('path, circle');
 const cityListDiv = document.getElementById('cityList');
 const searchInput = document.getElementById('searchInput');
 const detailsBox = document.getElementById('cityDetails');
+const statType = document.getElementById('statType');
+const statList = document.getElementById('statList');
 
 const selectCity = (target) => {
   paths.forEach(p => {
-    const original = p.getAttribute('data-original-fill');
-    if (original) p.style.fill = original;
+    const o = p.getAttribute('data-original-fill');
+    if (o) p.style.fill = o;
   });
-
-  const originalFill = target.getAttribute('data-original-fill');
-  if (!originalFill) target.setAttribute('data-original-fill', target.style.fill);
+  if (!target.getAttribute('data-original-fill')) {
+    target.setAttribute('data-original-fill', target.style.fill);
+  }
   target.style.fill = 'purple';
   featuresGroup.appendChild(target);
-
-  const cityName = target.getAttribute('name');
-
-  const data = cityDataCSV[cityName];
+  const name = target.getAttribute('name');
+  const data = cityDataCSV[name];
   if (data) {
     detailsBox.classList.remove('hidden');
-    document.getElementById('cityName').textContent = cityName;
+    document.getElementById('cityName').textContent = name;
     document.getElementById('nufus').textContent = data['nüfus'];
     document.getElementById('soguk').textContent = data['en_soğuk'];
     document.getElementById('sicak').textContent = data['en_sıcak'];
-    document.getElementById('bolge').textContent = data['bolge'];
+    document.getElementById('bolge').textContent = data['bölge'];
   } else {
     detailsBox.classList.add('hidden');
   }
 };
 
-featuresGroup.addEventListener('click', function (event) {
-  if (['path', 'circle'].includes(event.target.tagName.toLowerCase())) {
-    selectCity(event.target);
+featuresGroup.addEventListener('click', e => {
+  if (['path','circle'].includes(e.target.tagName.toLowerCase())) {
+    selectCity(e.target);
   }
 });
 
@@ -427,18 +439,23 @@ window.onload = () => {
       p.setAttribute('data-original-fill', p.style.fill || '#000');
     }
   });
-  updateCityList();
 };
 
 const updateCityList = () => {
-  const searchTerm = searchInput.value.toLowerCase();
+  const t = searchInput.value.toLowerCase();
   cityListDiv.innerHTML = '';
-
   paths.forEach(el => {
-    const name = el.getAttribute('name');
-    if (name && name.toLowerCase().includes(searchTerm)) {
+    const n = el.getAttribute('name');
+    if (n && n.toLowerCase().includes(t)) {
       const item = document.createElement('div');
-      item.textContent = name;
+      const data = cityDataCSV[n];
+      let info = '';
+      if (data) {
+        if (statType.value === 'sıcak') info = ` (${data['en_sıcak']}°C)`;
+        else if (statType.value === 'soğuk') info = ` (${data['en_soğuk']}°C)`;
+        else info = ` (${(data['en_sıcak'] - data['en_soğuk']).toFixed(1)}°C)`;
+      }
+      item.textContent = `${n}${info}`;
       item.className = 'cursor-pointer hover:bg-gray-700 px-2 py-1 rounded text-sm';
       item.onclick = () => selectCity(el);
       cityListDiv.appendChild(item);
@@ -446,8 +463,33 @@ const updateCityList = () => {
   });
 };
 
+const renderStats = () => {
+  const arr = Object.values(cityDataCSV);
+  let list = [];
+  if (statType.value === 'sıcak') {
+    list = arr.sort((a,b) => b['en_sıcak'] - a['en_sıcak']);
+  } else if (statType.value === 'soğuk') {
+    list = arr.sort((a,b) => a['en_soğuk'] - b['en_soğuk']);
+  } else {
+    list = arr.map(c => ({...c, delta: c['en_sıcak'] - c['en_soğuk']}))
+              .sort((a,b) => b.delta - a.delta);
+  }
+  statList.innerHTML = list.map((c,i) =>
+    `<li class="px-2 py-1">${i+1}. ${c['iladı']} ${
+      statType.value === 'fark'
+        ? '(' + (c.delta).toFixed(1) + '°C)'
+        : '(' + (statType.value === 'sıcak' ? c['en_sıcak'] : c['en_soğuk']) + '°C)'
+    }</li>`).join('');
+};
+
+statType.addEventListener('change', () => {
+  renderStats();
+  updateCityList();
+});
+
 searchInput.addEventListener('input', updateCityList);
 </script>
+
 
 </body>
 </html>
